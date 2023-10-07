@@ -56,7 +56,6 @@ body {
 
 .posts {
   flex: 3 0 0;
-  border: 0px!important;
 
 }
 
@@ -111,15 +110,16 @@ body {
 
 .post { 
   position: absolute;
-  max-width: calc(60vw - 208px);
+  // max-width: calc(60vw - 208px);
   text-align: center;
   opacity: 0;
-  transition: 1.5s;
-  transition-property: opacity;
+  // transition: 1.5s;
+  // transition-property: opacity;
   &.active {
+    position: static;
     opacity: 1;
-    transition: 1.5s;
-    transition-delay: 1.1s;
+    transition: 2.5s;
+    // transition-delay: 1.1s;
     transition-property: opacity;
   }
 }
@@ -169,8 +169,8 @@ body {
     margin-right: 20px;
   }
 }
-@media screen and (min-width: 1140px) {
-  .post{
-    max-width: calc(calc(1140px - 260px) * 0.6);
-  }
-}
+// @media screen and (min-width: 1140px) {
+//   .post{
+//     max-width: calc(calc(1140px - 260px) * 0.6);
+//   }
+// }

@@ -41,7 +41,7 @@ const titleClickHandler = function(event){
     correctArticle.classList.add('active');
 }
 
-function generateTitleLinks(){
+const generateTitleLinks = function (){
 /* remove contents of titleList */
     document.querySelector('.titles').innerHTML ="";
 
