@@ -15,6 +15,7 @@ $font-text: 'Play', sans-serif;
 a{
   text-decoration: none;
 }
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -38,6 +39,7 @@ body {
   text-transform: uppercase;
   font-family: $font-header;
   font-weight: 600;
+
   span {
     text-transform: none;
     font-weight: 400;
@@ -85,9 +87,11 @@ body {
   list-style-type: none;
   margin: 0;
   padding: 0;
+
   .active {
     font-weight: bold;
   }
+
   li{
     text-decoration: none;
 
@@ -110,13 +114,14 @@ body {
 
 /* Post */
 
-.post { 
+.post {
   position: absolute;
   // max-width: calc(60vw - 208px);
   text-align: center;
   opacity: 0;
   // transition: 1.5s;
   // transition-property: opacity;
+
   &.active {
     position: static;
     opacity: 1;
@@ -133,6 +138,7 @@ body {
 
 .post-tags {
   display: flex;
+
   p {
     margin: 0 10px 0 0;
   }
@@ -146,15 +152,12 @@ body {
     margin-inline: auto;
     gap: 12px;
   }
-  .section-title{
 
-  }
   .sidebar{
     text-align: center;
     order: 1;
     padding: 5px;
     margin: 0;
-    
 
     .list{
       display: flex;
@@ -162,15 +165,18 @@ body {
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-around;
+
       li{
         padding-inline: 8px;
       }
     }
   }
+
   .posts{
     order: 0;
     margin: 0;
   }
+
   .post{
     max-width: 100%;
     margin-right: 20px;
