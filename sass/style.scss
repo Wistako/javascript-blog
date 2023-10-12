@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:400,600|Sacramento|Source+Sans+Pro:300&subset=latin-ext');
 
+@import url('https://fonts.googleapis.com/css2?family=Play&family=Quicksand:wght@300&display=swap');
+
 /* Variables */
 
 $color-light: #fff;
@@ -7,7 +9,7 @@ $color-dark: #444;
 
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
-$font-text: 'Source Sans Pro', sans-serif;
+$font-text: 'Play', sans-serif;
 
 /* Global */
 a{
@@ -64,7 +66,7 @@ body {
   margin-right: 10px;
   padding: 40px;
   border: 1px solid $color-dark;
-  border-radius: 15px;
+  border-radius: 30px;
 }
 
 /* Logo */
@@ -140,6 +142,9 @@ body {
 @media screen and (max-width: 780px) {
   .wrapper{
     flex-direction: column-reverse;
+    max-width: 90%;
+    margin-inline: auto;
+    gap: 12px;
   }
   .section-title{
 
@@ -148,6 +153,7 @@ body {
     text-align: center;
     order: 1;
     padding: 5px;
+    margin: 0;
     
 
     .list{
@@ -163,6 +169,7 @@ body {
   }
   .posts{
     order: 0;
+    margin: 0;
   }
   .post{
     max-width: 100%;
