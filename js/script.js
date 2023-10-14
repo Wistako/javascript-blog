@@ -2,6 +2,7 @@
   'use strict';
   const optArticleTagsSelector = '.post-tags .list';
   const optArticleSelector = '.post';
+  const optTagsListSelector = '.tags.list';
   /*
 document.getElementById('test-button').addEventListener('click', function(){
     const links = document.querySelectorAll('.titles a');
@@ -76,7 +77,25 @@ document.getElementById('test-button').addEventListener('click', function(){
 
   generateTitleLinks();
 
+  const calculateTagsParams = function(tags){
+    let tagParams = { max: ''
+    };
+    for (let tag in tags) {
+      if (tags[tag] > tagParams.max){
+        tagParams.max = tags[tag];
+        if(!tagParams.hasOwnProperty('min')){
+          tagParams.min = tags[tag];
+        }
+      } else if(tags[tag] < tagParams.min ){
+        tagParams.min = tags[tag];
+      }
+    }
+    return tagParams;
+  };
+
   const generateTags =function(){
+
+    let allTags = {};
     /* find all articles */
     const articles = document.querySelectorAll('.post');
     /* START LOOP: for every article: */
@@ -95,12 +114,35 @@ document.getElementById('test-button').addEventListener('click', function(){
         const tag = '<li><a href="#tag-' + genTag + '">' + genTag + '</a></li>';
         /* add generated code to html variable */
         taglinkHTML += tag + ' ';
+        if(!allTags[tag]){
+          allTags[tag] = 1;
+        }else {
+          allTags[tag]++;
+        }
       /* END LOOP: for each tag */
       }
       /* insert HTML of all the links into the tags wrapper */
       tagsWrapper.innerHTML = taglinkHTML;
     /* END LOOP: for every article: */
     }
+    const tagList = document.querySelector(optTagsListSelector);
+    /* [NEW] create variable for all links HTML code */
+    let allTagsHTML = '';
+
+    /* [NEW] START LOOP: for each tag in allTags: */
+    for(let tag in allTags){
+      /* [NEW] generate code of a link and add it to allTagsHTML */
+      allTagsHTML += tag.replace('</a></li>' ,' (' + allTags[tag] + ')</a></li> ');
+      console.log(tag);
+      console.log(allTags[tag]);
+    }
+    /* [NEW] END LOOP: for each tag in allTags: */
+    console.log(allTags);
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams: ', tagsParams);
+
+    /*[NEW] add HTML from allTagsHTML to tagList */
+    tagList.innerHTML = allTagsHTML;
   };
 
   generateTags();
@@ -137,7 +179,6 @@ document.getElementById('test-button').addEventListener('click', function(){
   const addClickListenersToTags = function (){
     /* find all links to tags */
     const allTags = document.querySelectorAll('a[href^="#tag-"]');
-    console.log(allTags);
     /* START LOOP: for each link */
     for(let tagLink of allTags){
       /* add tagClickHandler as event listener for that link */
@@ -156,7 +197,6 @@ document.getElementById('test-button').addEventListener('click', function(){
       // For all find argument author
       const author = article.getAttribute('data-author');
       // Create a link
-      console.log(author);
       const href = author.replace(' ', '-');
       const linkHTML = '<a href=#author'+ href +'>' + author + '</a>';
       // Find author wrapper
@@ -171,7 +211,6 @@ document.getElementById('test-button').addEventListener('click', function(){
   const authorClickHandler = function(event){
     event.preventDefault();
     const clickedElement = this;
-    console.log(clickedElement);
     // Get href atriibute
     const href = clickedElement.getAttribute('href');
     // Find author
@@ -189,4 +228,8 @@ document.getElementById('test-button').addEventListener('click', function(){
     }
   };
   addClickListenersToAuthors();
+
+
+
+
 }
