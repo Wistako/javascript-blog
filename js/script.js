@@ -3,6 +3,8 @@
   const optArticleTagsSelector = '.post-tags .list';
   const optArticleSelector = '.post';
   const optTagsListSelector = '.tags.list';
+  const optCloudClassCount = 5;
+  const optCloudClassPrefix = 'tag-size-';
   /*
 document.getElementById('test-button').addEventListener('click', function(){
     const links = document.querySelectorAll('.titles a');
@@ -93,6 +95,13 @@ document.getElementById('test-button').addEventListener('click', function(){
     return tagParams;
   };
 
+  const calculateTagClass = function(count, params){
+    const difference = count - params.min;
+    const range= params.max - params.min;
+    const res =(difference/range);
+    const classNumber = Math.floor( res * (optCloudClassCount - 1) + 1 );
+    return optCloudClassPrefix + classNumber;
+  };
   const generateTags =function(){
 
     let allTags = {};
@@ -111,7 +120,7 @@ document.getElementById('test-button').addEventListener('click', function(){
       /* START LOOP: for each tag */
       for(let genTag of tagsAray){
         /* generate HTML of the link */
-        const tag = '<li><a href="#tag-' + genTag + '">' + genTag + '</a></li>';
+        const tag = '<li><a href="#tag-' + genTag + '" class="">' +  genTag + '</a></li>';
         /* add generated code to html variable */
         taglinkHTML += tag + ' ';
         if(!allTags[tag]){
@@ -128,23 +137,20 @@ document.getElementById('test-button').addEventListener('click', function(){
     const tagList = document.querySelector(optTagsListSelector);
     /* [NEW] create variable for all links HTML code */
     let allTagsHTML = '';
+    const tagsParams = calculateTagsParams(allTags);
+    console.log('tagsParams: ', tagsParams);
 
     /* [NEW] START LOOP: for each tag in allTags: */
     for(let tag in allTags){
       /* [NEW] generate code of a link and add it to allTagsHTML */
-      allTagsHTML += tag.replace('</a></li>' ,' (' + allTags[tag] + ')</a></li> ');
-      console.log(tag);
-      console.log(allTags[tag]);
+      const classTag = tag.replace('class="', 'class="' + calculateTagClass(allTags[tag], tagsParams));
+      allTagsHTML += classTag.replace('</a></li>' ,' (' + allTags[tag] + ')</a></li> ');
     }
     /* [NEW] END LOOP: for each tag in allTags: */
-    console.log(allTags);
-    const tagsParams = calculateTagsParams(allTags);
-    console.log('tagsParams: ', tagsParams);
 
     /*[NEW] add HTML from allTagsHTML to tagList */
     tagList.innerHTML = allTagsHTML;
   };
-
   generateTags();
 
   const tagClickHandler = function (event){

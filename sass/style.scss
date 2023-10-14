@@ -112,6 +112,30 @@ body {
   }
 }
 
+/* Tags */
+.list.tags li{
+  display: inline-block;
+}
+
+.tag-size-5{
+  font-size: 150%;
+}
+
+.tag-size-4{
+  font-size: 125%;
+}
+
+.tag-size-3{
+  font-size: 100%;
+}
+
+.tag-size-2{
+  font-size: 90%;
+}
+
+.tag-size-1{
+  font-size: 80%;
+}
 /* Post */
 
 .post {
