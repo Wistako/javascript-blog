@@ -5,6 +5,7 @@
   const optTagsListSelector = '.tags.list';
   const optCloudClassCount = 5;
   const optCloudClassPrefix = 'tag-size-';
+  const optAuthorListSelector = '.list.authors';
   /*
 document.getElementById('test-button').addEventListener('click', function(){
     const links = document.querySelectorAll('.titles a');
@@ -197,19 +198,32 @@ document.getElementById('test-button').addEventListener('click', function(){
 
 
   const generateAuthors = function (){
+    let allAuthors = {};
+    let authorsLinkHTML = '';
     // Find aricle
     const articles = document.querySelectorAll(optArticleSelector);
     for (const article of articles) {
       // For all find argument author
       const author = article.getAttribute('data-author');
       // Create a link
+
       const href = author.replace(' ', '-');
-      const linkHTML = '<a href=#author'+ href +'>' + author + '</a>';
+      const linkHTML = '<a href=#author-'+ href +'>' + author + '</a>';
       // Find author wrapper
       const authorWrapper = article.querySelector('.post-author');
       // Add link
       authorWrapper.innerHTML = linkHTML;
+      if(!allAuthors[linkHTML]){
+        allAuthors[linkHTML] = 1;
+      } else {
+        allAuthors[linkHTML]++;
+      }
     }
+    for (const key in allAuthors) {
+      authorsLinkHTML += '<li>' + key.replace('</a>' , ' (' + allAuthors[key] + ')</a></li>');
+    }
+    const authorsWrapper = document.querySelector(optAuthorListSelector);
+    authorsWrapper.innerHTML = authorsLinkHTML;
   };
 
   generateAuthors();
@@ -220,7 +234,7 @@ document.getElementById('test-button').addEventListener('click', function(){
     // Get href atriibute
     const href = clickedElement.getAttribute('href');
     // Find author
-    const author = href.replace('#author' , '');
+    const author = href.replace('#author-' , '');
     const dataAuthor = author.replace('-', ' ');
     generateTitleLinks('[data-author="' + dataAuthor + '"]');
   };
@@ -230,6 +244,11 @@ document.getElementById('test-button').addEventListener('click', function(){
     const authors = document.querySelectorAll('.post-author a');
     // Add eventlistener in loop
     for (let author of authors) {
+      author.addEventListener('click', authorClickHandler);
+    }
+    const authorList = document.querySelectorAll('.list.authors a');
+    for (let author of authorList){
+      console.log(author);
       author.addEventListener('click', authorClickHandler);
     }
   };

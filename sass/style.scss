@@ -56,11 +56,12 @@ body {
 
 .sidebar {
   flex: 1 0 0;
+  z-index: 10;
 }
 
 .posts {
   flex: 3 0 0;
-
+  z-index: 1;
 }
 
 .sidebar, .posts {
