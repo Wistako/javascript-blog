@@ -1,5 +1,8 @@
 {
   'use strict';
+  const templates = {
+    articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML)
+  };
   const optArticleTagsSelector = '.post-tags .list';
   const optArticleSelector = '.post';
   const optTagsListSelector = '.tags.list';
@@ -67,11 +70,14 @@ document.getElementById('test-button').addEventListener('click', function(){
 
       /* create HTML of the link */
 
-      linkHTML +='<li><a href="#' + articleId + '"><span>' + articleTitle  + '</span></a></li>';
+      //  linkHTML +='<li><a href="#' + articleId + '"><span>' + articleTitle  + '</span></a></li>';
+      const linkHTMLData = {id: articleId, title: articleTitle};
+      linkHTML += templates.articleLink(linkHTMLData);
+      console.log(linkHTML);
     }
     /* insert link into titleList */
-
     document.querySelector('.titles').innerHTML = linkHTML;
+
     const links = document.querySelectorAll('.titles a');
     for (let link of links){
       link.addEventListener('click', titleClickHandler);
