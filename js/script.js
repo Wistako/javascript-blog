@@ -127,7 +127,9 @@ document.getElementById('test-button').addEventListener('click', function(){
       /* START LOOP: for each tag */
       for(let genTag of tagsAray){
         /* generate HTML of the link */
-        const tag = '<li><a href="#tag-' + genTag + '" class="">' +  genTag + '</a></li>';
+        const linkHTMLData = {id: genTag, title: genTag};
+        const tag = templates.articleLink(linkHTMLData);
+        // const tag = '<li><a href="#tag-' + genTag + '" class="">' +  genTag + '</a></li>';
         /* add generated code to html variable */
         taglinkHTML += tag + ' ';
         if(!allTags[tag]){
@@ -150,6 +152,7 @@ document.getElementById('test-button').addEventListener('click', function(){
     /* [NEW] START LOOP: for each tag in allTags: */
     for(let tag in allTags){
       /* [NEW] generate code of a link and add it to allTagsHTML */
+      console.log(allTags);
       const classTag = tag.replace('class="', 'class="' + calculateTagClass(allTags[tag], tagsParams));
       allTagsHTML += classTag.replace('</a></li>' ,' (' + allTags[tag] + ')</a></li> ');
     }
@@ -254,7 +257,6 @@ document.getElementById('test-button').addEventListener('click', function(){
     }
     const authorList = document.querySelectorAll('.list.authors a');
     for (let author of authorList){
-      console.log(author);
       author.addEventListener('click', authorClickHandler);
     }
   };
