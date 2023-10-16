@@ -216,8 +216,12 @@ document.getElementById('test-button').addEventListener('click', function(){
       const author = article.getAttribute('data-author');
       // Create a link
 
-      const href = author.replace(' ', '-');
-      const linkHTML = '<a href=#author-'+ href +'>' + author + '</a>';
+      const href = 'author-' + author.replace(' ', '-');
+      const linkHTMLData = {id: href, title: author};
+      const linkHTML = templates.articleLink(linkHTMLData);
+
+      console.log(linkHTML);
+      // const linkHTML = '<a href=#author-'+ href +'>' + author + '</a>';
       // Find author wrapper
       const authorWrapper = article.querySelector('.post-author');
       // Add link
