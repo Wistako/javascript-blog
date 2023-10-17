@@ -203,6 +203,7 @@ document.getElementById('test-button').addEventListener('click', function(){
     const allTags = document.querySelectorAll('a[href^="#tag-"]');
     /* START LOOP: for each link */
     for(let tagLink of allTags){
+      console.log(tagLink);
       /* add tagClickHandler as event listener for that link */
       tagLink.addEventListener('click', tagClickHandler);
     /* END LOOP: for each link */
@@ -242,7 +243,6 @@ document.getElementById('test-button').addEventListener('click', function(){
         count: allAuthors[key],
         href: key.replace(' ', '-')
       });
-      console.log(authorsHTMLData);
       // authorsLinkHTML += '<li>' + key.replace('</a>' , ' (' + allAuthors[key] + ')</a></li>');
     }
     const authorsWrapper = document.querySelector(optAuthorListSelector);
